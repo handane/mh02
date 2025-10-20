@@ -70,7 +70,16 @@ if (!isset($_SESSION["admin"])) {
                     <select name="power" class="form-select" id="" require>
                         <option value="-">-</option>
                         <option value="true">True</option>
-                        <option value="false">False</option>
+                        <option value="-">False</option>
+                    </select>
+
+                    <label for="" class="form-label-md mt-3"><b>Xiao</b></label>
+                    <select name="xiao" class="form-select" id="" require>
+                        <option value="3.0">-</option>
+                        <option value="3.0">Xiao 3.0</option>
+                        <option value="3.1">Xiao 3.1</option>
+                        <option value="can">Can</option>
+                        <option value="can31">Can 3.1</option>
                     </select>
 
                         <label for="" class="form-label-md mt-3"><b>Teknisi</b></label>
@@ -90,6 +99,7 @@ if (!isset($_SESSION["admin"])) {
                         $device_id = $_POST['device_id'];
                         $ip_address = $_POST['ip_address'];
                         $modem_cpe = $_POST['modem_cpe'];
+                        $xiao = $_POST['xiao'];
                         $status = 'terpasang';
                         $date = date('d-m-Y');
                         $waktu = date('d-m-Y H:i');
@@ -105,6 +115,7 @@ if (!isset($_SESSION["admin"])) {
                             mh02status = '$status',
                             modem_cpe = '$modem_cpe',
                             power = '$power',
+                            xiao = '$xiao',
                             last_update = '$date',
                             note = '$note',
                             date_created = '$date_created'

@@ -3,13 +3,13 @@
             <div class="sb-sidenav-menu">
                <div class="nav">
                   <div class="sb-sidenav-menu-heading">Menu</div>
-                  <a class="nav-link monitor" href="dashboard.php">
+                  <a class="nav-link monitor" href="index.php">
                      <div class="sb-nav-link-icon">
                         <i class="fas fa-laptop"></i>
                      </div>
                      Monitor
                   </a>
-                  <a class="nav-link data" href="index.php">
+                  <a class="nav-link data" href="home.php">
                      <div class="sb-nav-link-icon">
                         <i class="fas fa-folder-open"></i>
                      </div>
@@ -23,19 +23,19 @@
                   </a>
                   <a class="nav-link instalasi" href="pasang-baru.php">
                      <div class="sb-nav-link-icon">
-                        <i class="fas fa-edit"></i>
+                        <i class="fas fa-truck"></i>
                      </div>
                      Instalasi
                   </a>
                   <a class="nav-link replace" href="replace-unit.php">
                      <div class="sb-nav-link-icon">
-                        <i class="fas fa-edit"></i>
+                        <i class="fas fa-exchange-alt"></i>
                      </div>
                      Replace
                   </a>
                   <a class="nav-link lepas" href="lepas-unit.php">
                      <div class="sb-nav-link-icon">
-                        <i class="fas fa-edit"></i>
+                        <i class="fas fa-eraser"></i>
                      </div>
                      Lepas
                   </a>
@@ -44,6 +44,12 @@
                         <i class="fas fa-atom"></i>
                      </div>
                      Datalog Filter
+                  </a>
+                  <a class="nav-link bracket" href="bracket.php">
+                     <div class="sb-nav-link-icon">
+                        <i class="fab fa-bimobject"></i>
+                     </div>
+                     Bracket
                   </a>
                   <!-- <a class="nav-link" href="prev-maintenance.php">
                      <div class="sb-nav-link-icon">

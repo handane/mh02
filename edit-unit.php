@@ -34,7 +34,7 @@ if (!isset($_SESSION["admin"])) {
     <main>
         <div class="container-fluid px-3">
           <ol class="breadcrumb mb-4 mt-2">
-            <li class=""><a href="./"><< back</a> | </li>
+            <li class=""><a href="./home.php"><< back</a> | </li>
             <li class="">| <b>Detail Device</b></li>
           </ol>
             <div class="card mt-3 col-md-6">
@@ -49,7 +49,7 @@ if (!isset($_SESSION["admin"])) {
                     <input type="text" class="form-control" value="<?= $row['deviceid'] ?>"  name="unit_number" readonly>
 
                     <label for="" class="form-label-md mt-2"><b>Unit Number</b></label>
-                    <input type="text" class="form-control" value="<?= $row['unitno'] ?>"  name="unit_number" readonly>
+                    <input type="text" class="form-control" value="<?= $row['unitno'] ?>"  name="unit_number">
 
                     <label for="" class="form-label-md mt-2"><b>Device IP</b></label>
                     <input type="text" class="form-control" value="<?= $row['deviceip'] ?>"  name="device_ip">
@@ -81,7 +81,23 @@ if (!isset($_SESSION["admin"])) {
                     <select name="power" class="form-select" id="" require>
                         <option value="<?= $row['power'] ?>"><?= $row['power'] ?></option>
                         <option value="true">True</option>
-                        <option value="false">False</option>
+                        <option value="-">False</option>
+                    </select>
+
+                    <label for="" class="form-label-md mt-3"><b>SPM</b></label>
+                    <select name="spm" class="form-select" id="" require>
+                        <option value="<?= $row['xiao'] ?>"><?= $row['xiao'] ?></option>
+                        <option value="3.0">Ares 3.0</option>
+                        <option value="3.1">Ares 3.1</option>
+                        <option value="can">Can</option>
+                        <option value="can31">Can 3.1</option>
+                    </select>
+
+                    <label for="" class="form-label-md mt-3"><b>Bracket</b></label>
+                    <select name="bracket" class="form-select" id="" require>
+                        <option value="<?= $row['bracket'] ?>"><?= $row['bracket'] ?></option>
+                        <option value="baru">Baru</option>
+                        <option value="lama">Lama</option>
                     </select>
 
                     <label for="" class="form-label-md mt-2"><b><i>*Note</b></i></label>
@@ -98,20 +114,25 @@ if (!isset($_SESSION["admin"])) {
                 <?php
                     if (isset($_POST['submit'])) {
                     date_default_timezone_set('Asia/Makassar');
+                    $unit_number = $_POST['unit_number'];
                     $status = $_POST['status'];
                     $note = $_POST['note'];
                     $modem_cpe = $_POST['modem_cpe'];
                     $device_ip = $_POST['device_ip'];
                     $power = $_POST['power'];
+                    $spm = $_POST['spm'];
+                    $bracket = $_POST['bracket'];
                     $date = date('d-m-Y');
                     $date_created = date('Y-m-d H:i:s');
 
                     $update = mysqli_query($conn, "UPDATE devices SET
-                        deviceid = '$deviceid',
                         deviceip = '$device_ip',
+                        unitno = '$unit_number',
                         mh02status = '$status',
                         modem_cpe = '$modem_cpe',
                         power = '$power',
+                        xiao = '$spm',
+                        bracket = '$bracket',
                         last_update = '$date',
                         note = '$note',
                         date_created = '$date_created'

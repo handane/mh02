@@ -90,6 +90,8 @@ if (!isset($_SESSION["admin"])) {
                             deviceid = '$device_id',
                             mh02status = '$status',
                             modem_cpe = '$min',
+                            power = '$min',
+                            xiao = '$min',
                             last_update = '$date',
                             note = '$note',
                             date_created = '$date_created'
@@ -120,7 +122,7 @@ if (!isset($_SESSION["admin"])) {
               </div>
               <?php
                   $no = 1;
-                  $get_riwayat = mysqli_query($conn, "SELECT * FROM lepas_device ORDER BY tanggal DESC");
+                  $get_riwayat = mysqli_query($conn, "SELECT * FROM lepas_device ORDER BY unit ASC");
                   ?>
               <div class="col-md-6 p-2">
                 <div class="card card-body">

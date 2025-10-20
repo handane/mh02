@@ -22,12 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['jsonfile'])) {
                 $json = json_decode($line, true);
                 if (json_last_error() === JSON_ERROR_NONE) {
                     $entry = [
-                        'currentheartbeatlocal' => $json['devicestatus']['vlog']['currentheartbeatlocal'] ?? null,
+                        'unitno' => $json['unitno'] ?? null,
+                        'timestampiso' => $json['timestampiso'] ?? null,
                         'gpslong' => $json['gpslong'] ?? null,
                         'gpslat' => $json['gpslat'] ?? null,
                         'gpsspeed' => $json['gpsspeed'] ?? null,
                         'RPM' => $json['RPM'] ?? null,
                         'CurrentGear' => $json['CurrentGear'] ?? null,
+                        'plm_speed_can' => $json['plm_speed_can'] ?? null,
                         'VehicleSpeed' => $json['VehicleSpeed'] ?? null,
                         'geomaxspeed' => $json['geomaxspeed'] ?? null,
                         'geosegment' => $json['geosegment'] ?? null
@@ -160,12 +162,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['jsonfile'])) {
                     <table>
                     <thead>
                         <tr>
+                        <th>Unitno</th>
                         <th>Heartbeat</th>
                         <th>GPS Long</th>
                         <th>GPS Lat</th>
                         <th>GPS Speed</th>
                         <th>RPM</th>
                         <th>Gear</th>
+                        <th>PLM speed can</th>
                         <th>Vehicle Speed</th>
                         <th>Geo Max Speed</th>
                         <th>Geo Segment</th>
@@ -174,12 +178,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['jsonfile'])) {
                     <tbody>
                         <?php foreach ($filteredData as $row) : ?>
                         <tr>
-                            <td><?= htmlspecialchars($row['currentheartbeatlocal']) ?></td>
+                            <td><?= htmlspecialchars($row['unitno']) ?></td>
+                            <td><?= htmlspecialchars($row['timestampiso']) ?></td>
                             <td><?= htmlspecialchars($row['gpslong']) ?></td>
                             <td><?= htmlspecialchars($row['gpslat']) ?></td>
                             <td><?= htmlspecialchars($row['gpsspeed']) ?></td>
                             <td><?= htmlspecialchars($row['RPM']) ?></td>
                             <td><?= htmlspecialchars($row['CurrentGear']) ?></td>
+                            <td><?= htmlspecialchars($row['plm_speed_can']) ?></td>
                             <td><?= htmlspecialchars($row['VehicleSpeed']) ?></td>
                             <td><?= htmlspecialchars($row['geomaxspeed']) ?></td>
                             <td><?= htmlspecialchars($row['geosegment']) ?></td>

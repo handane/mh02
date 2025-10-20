@@ -70,12 +70,14 @@ if (!isset($_SESSION["admin"])) {
 
                         $get_device = mysqli_query($conn, "SELECT * FROM devices WHERE deviceid = '$device_id'");
                         if (mysqli_num_rows($get_device) < 1){
-                          $update = mysqli_query($conn, "INSERT INTO devices VALUES(
+                          $updatan = mysqli_query($conn, "INSERT INTO devices VALUES(
                               null,
                               '".$device_id."',
                               '".$min."',
                               '".$device_ip."',
                               '".$status."',
+                              '".$min."',
+                              '".$min."',
                               '".$min."',
                               '".$min."',
                               '".$date."',
@@ -90,12 +92,10 @@ if (!isset($_SESSION["admin"])) {
                                 '".$admin."'
                                 )");
                               
-                          if ($update) {
-                          echo
-                          '<script>
-                          window.location="tambah-unit.php";
-                          alert("data berhasil ditambahkan");
-                          </script>';
+                          if ($updatan) {
+                            '<script>
+                            window.location="tambah-unit.php";
+                            </script>';
                           } else {
                           echo 'gagal ' . mysqli_error($conn);
                           }

@@ -79,7 +79,7 @@ if (isset($_POST["submit"])) {
             // Verifikasi password dengan password_verify
             if (password_verify($password, $user['password'])) {
                 $_SESSION["admin"] = $user;
-                echo "<script>location='dashboard.php';</script>";
+                echo "<script>location='home.php';</script>";
             } else {
                 // Pesan kesalahan jika password salah
                 echo '

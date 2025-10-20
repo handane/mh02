@@ -10,7 +10,7 @@ if (isset($_GET['deviceid'])) {
    $delete_produk = mysqli_query($conn, "DELETE FROM devices WHERE deviceid = '$deviceid'");
    if($delete_produk){
       echo "<script>alert('Data berhasil dihapus')</script>";
-      echo "<script>window.location='./'</script>";
+      echo "<script>window.location='home.php'</script>";
    }
 }
 ?>

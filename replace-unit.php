@@ -79,6 +79,8 @@ if (!isset($_SESSION["admin"])) {
                         $pdevlama = mysqli_fetch_array($get_devicelama);
                         $unitnolama = $pdevlama['unitno'];
                         $iplama = $pdevlama['deviceip'];
+                        $cpe_lama = $pdevlama['modem_cpe'];
+                        $xiao_lama = $pdevlama['xiao'];
 
                         $devicebaru = $_POST['devicebaru'];
                         $status_terpasang = 'terpasang';
@@ -94,6 +96,8 @@ if (!isset($_SESSION["admin"])) {
                             mh02status = '$status_rusak',
                             modem_cpe = '$min',
                             last_update = '$date',
+                            power = '-',
+                            xiao = '-',
                             date_created = '$date_created'
                             WHERE deviceid = '$devicelama'
                             ");
@@ -103,6 +107,9 @@ if (!isset($_SESSION["admin"])) {
                             deviceip = '$iplama',
                             mh02status = '$status_terpasang',
                             last_update = '$date',
+                            power = 'true',
+                            modem_cpe = '$cpe_lama',
+                            xiao = '$xiao_lama',
                             date_created = '$date_created'
                             WHERE deviceid = '$devicebaru'
                             ");  

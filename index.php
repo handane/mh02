@@ -4,6 +4,7 @@ include("database/db.php");
 if (!isset($_SESSION["admin"])) {
   echo "<script>location='login.php'</script>";
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,11 +13,18 @@ if (!isset($_SESSION["admin"])) {
   <?php include('./include/meta.php') ?>
   
   <style>
-    #ftz16 {
-      font-size: 16px;
+    body {
+      background-color: #f1f1f1;
     }
-    .data {
-      background-color:saddlebrown;
+    .top-title {
+      text-align: center;
+      font-size: 14px;
+    }
+    table td{
+      font-size: 13px;
+    }
+    .monitor {
+      background-color:cadetblue;
     }
   </style>
 </head>
@@ -29,90 +37,219 @@ if (!isset($_SESSION["admin"])) {
     
     <div id="layoutSidenav_content">
     <main>
-        <div class="container-fluid">
-          <ol class="breadcrumb mb-4 mt-2">
-            <li class="breadcrumb-item active">Tabel Data & Control</li>
-          </ol>
-          <div class="col-md-12 row" style="text-align:center;">
-            <?php
-            $get_terpasang = mysqli_query($conn, "SELECT * FROM devices WHERE mh02status LIKE 'terpasang'");
-            $stok_terpasang = mysqli_num_rows($get_terpasang);
-            $get_rusak = mysqli_query($conn, "SELECT * FROM devices WHERE mh02status LIKE 'rusak'");
-            $stok_rusak = mysqli_num_rows($get_rusak);
-            $get_standby = mysqli_query($conn, "SELECT * FROM devices WHERE mh02status LIKE 'standby'");
-            $stok_standby = mysqli_num_rows($get_standby);
-            $get_kembalikeho = mysqli_query($conn, "SELECT * FROM devices WHERE mh02status LIKE 'kembali ke HO'");
-            $stok_kembalikeho = mysqli_num_rows($get_kembalikeho);
-            $get_modem = mysqli_query($conn, "SELECT * FROM devices WHERE modem_cpe LIKE 'terpasang'");
-            $stok_modem = mysqli_num_rows($get_modem);
-            $get_power = mysqli_query($conn, "SELECT * FROM devices WHERE power LIKE 'true'");
-            $stok_power = mysqli_num_rows($get_power);
-            ?>
-            <div class="mb-2 col-md-2 bg-primary" style="color:white">
-              <div class="pt-2 pb-2">Terpasang: <b><?= $stok_terpasang ?></b></div>
-            </div>
-            <div class="mb-2 col-md-2 bg-warning" style="color:white">
-              <div class="pt-2 pb-2">Ada Power: <b><?= $stok_power ?></b></div>
-            </div>
-            <div class="mb-2 col-md-2 bg-success" style="color:white">
-              <div class="pt-2 pb-2">Standby: <b><?= $stok_standby ?></b></div>
-            </div>
-            <div class="mb-2 col-md-2 bg-danger" style="color:white">
-              <div class="pt-2 pb-2">Rusak: <b><?= $stok_rusak ?></b></div>
-            </div>
-            <div class="mb-2 col-md-2 bg-secondary" style="color:white">
-              <div class="pt-2 pb-2">Kembali ke HO: <b><?= $stok_kembalikeho ?></b></div>
-            </div>
-            <div class="mb-2 col-md-2 bg-info" style="color:white">
-              <div class="pt-2 pb-2">Modem: <b><?= $stok_modem ?></b></div>
-            </div>
-          </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <table id="datatablesSimple">
-                <thead>
-                  <tr style="font-size: 16px;">
-                    <th>Device ID</th>
-                    <th>Unit No</th>
-                    <th>Device IP</th>
-                    <th>Status MH</th>
-                    <th>Modem CPE</th>
-                    <th>Power</th>
-                    <th>Last Update</th>
-                    <th>Note</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
+        <div class="container-fluid px-3">
+            <h5 class="mt-4">Monitor</h4>
+            <div class="col-md-12 row">
+              <div class="col-md-2 p-2">
+                <?php
                   $no = 1;
-                  $get_paket = mysqli_query($conn, "SELECT * FROM devices ORDER BY date_created DESC");
-
-                  while ($p = mysqli_fetch_array($get_paket)) {
+                  $get_riwayat = mysqli_query($conn, "SELECT * FROM devices WHERE mh02status = 'standby' ORDER BY deviceid ASC");
+                  $get_riwayat_rusak = mysqli_query($conn, "SELECT * FROM devices WHERE mh02status = 'rusak' ORDER BY deviceid ASC");
                   ?>
-                    <tr style="font-size: 16px;" id="klik-tabel">
-                      <td><?php echo $p['deviceid']; ?></td>
-                      <td><?php echo $p['unitno']; ?></td>
-                      <td><?php echo $p['deviceip']; ?></td>
-                      <td><?php echo $p['mh02status']; ?></td>
-                      <td><?php echo $p['modem_cpe']; ?></td>
-                      <td><?php echo $p['power']; ?></td>
-                      <td><?php echo $p['last_update']; ?></td>
-                      <td><?php echo substr(implode(' ', explode(' ', $p['note'])), 0, 10);?>
-                      </td>
-                      <td><a class="btn btn-sm btn-warning m-1" href="edit-unit.php?deviceid=<?= $p['deviceid'] ?>">View</a></td>
+                <div class="card card-body">
+                  <h6 class="top-title">--- Standby ---</h6>
+                  <table>
+                    <tbody>
+                    <?php 
+                    while ($riw = mysqli_fetch_array($get_riwayat)) {
+                    ?>
+                    <tr>
+                      <td><?= $no++ ?>.</td>
+                      <td><?= $riw['deviceid'] ?></td>
                     </tr>
-                  <?php } ?>
-                </tbody>
-              </table>
+                    <?php }?>
+                    </tbody>
+                  </table>
+                  <h6 class="top-title mt-2">--- Repair ---</h6>
+                  <table>
+                    <tbody>
+                    <?php 
+                    while ($riw_rusak = mysqli_fetch_array($get_riwayat_rusak)) {
+                    ?>
+                    <tr>
+                      <td><?= $no++ ?>.</td>
+                      <td><?= $riw_rusak['deviceid'] ?></td>
+                    </tr>
+                    <?php }?>
+                    </tbody>
+                  </table>
+                </div>
+                <?php
+                  $no = 1;
+                  $get_riwayat_send = mysqli_query($conn, "SELECT * FROM devices WHERE mh02status = 'kembali ke HO' ORDER BY deviceid ASC");
+                  ?>
+                <div class="card card-body mt-1">
+                  <h6 class="top-title">-- Sending --</h6>
+                  <table>
+                    <tbody>
+                    <?php 
+                    while ($riw = mysqli_fetch_array($get_riwayat_send)) {
+                    ?>
+                    <tr>
+                      <td><?= $no++ ?>.</td>
+                      <td><?= $riw['deviceid'] ?></td>
+                    </tr>
+                    <?php }?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+              <div class="col-md-2 p-2">
+                <?php
+                  $no = 1;
+                  $get_riwayat = mysqli_query($conn, "SELECT * FROM devices WHERE power = '-' AND unitno != '-' ORDER BY unitno ASC");
+                  ?>
+                <div class="card card-body">
+                  <h6 class="top-title">-- Power False --</h6>
+                  <table>
+                    <tbody>
+                    <?php 
+                    while ($riw = mysqli_fetch_array($get_riwayat)) {
+                    ?>
+                    <tr>
+                      <td><?= $no++ ?>.</td>
+                      <td><?= $riw['unitno'] ?></td>
+                      
+                    </tr>
+                    <?php }?>
+                    </tbody>
+                  </table>
+                </div>
+                <?php
+                  $no = 1;
+                  $get_riwayat_cpe = mysqli_query($conn, "SELECT * FROM devices WHERE modem_cpe = '-' AND mh02status = 'terpasang' ORDER BY unitno ASC");
+                  ?>
+                <div class="card card-body mt-1">
+                  <h6 class="top-title">-- CPE False --</h6>
+                  <table>
+                    <tbody>
+                    <?php 
+                    while ($riw = mysqli_fetch_array($get_riwayat_cpe)) {
+                    ?>
+                    <tr>
+                      <td><?= $no++ ?>.</td>
+                      <td><?= $riw['unitno'] ?></td>
+                    </tr>
+                    <?php }?>
+                    </tbody>
+                  </table>
+                </div>
+
+                
+              </div>
+              <div class="col-md-2 p-2">
+                <?php
+                  $no = 1;
+                  $get_riwayat = mysqli_query($conn, "SELECT * FROM devices WHERE xiao = '3.1' ORDER BY unitno ASC");
+                ?>
+                <div class="card card-body">
+                  <h6 class="top-title">-- SPM Ares 3.1 --</h6>
+
+                  <!-- Tombol untuk menyalin -->
+                  <button onclick="salinUnitAres31()">Salin</button>
+
+                  <table>
+                    <tbody>
+                    <?php 
+                      $list_unit = []; // untuk menyimpan semua unit
+                      while ($riw = mysqli_fetch_array($get_riwayat)) {
+                        $list_unit[] = $riw['unitno']; // simpan ke array
+                    ?>
+                      <tr>
+                        <td><?= $no++ ?>.</td>
+                        <td><?= $riw['unitno'] ?></td>
+                      </tr>
+                    <?php } ?>
+                    </tbody>
+                  </table>
+
+                  <!-- Elemen tersembunyi untuk menyimpan daftar unitno -->
+                  <textarea id="unitList" style="position:absolute; left:-9999px;"><?= implode(", ", $list_unit) ?></textarea>
+
+                </div>
+              </div>
+
+              <div class="col-md-2 p-2">
+                <?php
+                  $no = 1;
+                  $get_riwayat = mysqli_query($conn, "SELECT * FROM devices WHERE xiao = '3.0' ORDER BY unitno ASC");
+                  ?>
+                <div class="card card-body">
+                  <h6 class="top-title">-- SPM Ares 3.0 --</h6>
+                  <table>
+                    <tbody>
+                    <?php 
+                    while ($riw = mysqli_fetch_array($get_riwayat)) {
+                    ?>
+                    <tr>
+                      <td><?= $no++ ?>.</td>
+                      <td><?= $riw['unitno'] ?></td>
+                    </tr>
+                    <?php }?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="col-md-2 p-2">
+                <?php
+                  $no = 1;
+                  $get_riwayat = mysqli_query($conn, "SELECT * FROM devices WHERE xiao = 'can' OR xiao = 'can31' ORDER BY unitno ASC");
+                  ?>
+                <div class="card card-body">
+                  <h6 class="top-title">-- SPM Can --</h6>
+                  <table>
+                    <tbody>
+                    <?php 
+                    while ($riw = mysqli_fetch_array($get_riwayat)) {
+                    ?>
+                    <tr>
+                      <td><?= $no++ ?>.</td>
+                      <td><?= $riw['unitno'] ?></td>
+                    </tr>
+                    <?php }?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="col-md-2 p-2">
+                <?php
+                  $no = 1;
+                  $get_riwayat = mysqli_query($conn, "SELECT * FROM devices WHERE xiao = 'can31' ORDER BY unitno ASC");
+                  ?>
+                <div class="card card-body">
+                  <h6 class="top-title">-- SPM Can 3.1 --</h6>
+                  <table>
+                    <tbody>
+                    <?php 
+                    while ($riw = mysqli_fetch_array($get_riwayat)) {
+                    ?>
+                    <tr>
+                      <td><?= $no++ ?>.</td>
+                      <td><?= $riw['unitno'] ?></td>
+                    </tr>
+                    <?php }?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
-          </div>
-      </main>
-      <footer class="mt-5">
-      </footer>
+        </div>
+    </main>
+    <footer class="mt-5">
+    </footer>
     </div>
   </div>
+  <script>
+    function salinUnitAres31() {
+      const teks = document.getElementById("unitList");
+      teks.select();
+      teks.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+
+      alert("List unit disalin ke clipboard!");
+    }
+  </script>
   <script src="js/scripts.js"></script>
   <script src="datatables/datatable.js"></script>
   <script src="js/datatables-simple-demo.js"></script>
