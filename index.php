@@ -147,25 +147,32 @@ if (!isset($_SESSION["admin"])) {
                   <h6 class="top-title">-- SPM Ares 3.1 --</h6>
 
                   <!-- Tombol untuk menyalin -->
-                  <button onclick="salinUnitAres31()">Salin</button>
+                  <button onclick="salinUnitAres31()" class="mb-2" style="border:none;">Copy</button>
 
                   <table>
                     <tbody>
-                    <?php 
-                      $list_unit = []; // untuk menyimpan semua unit
-                      while ($riw = mysqli_fetch_array($get_riwayat)) {
-                        $list_unit[] = $riw['unitno']; // simpan ke array
-                    ?>
-                      <tr>
-                        <td><?= $no++ ?>.</td>
-                        <td><?= $riw['unitno'] ?></td>
-                      </tr>
-                    <?php } ?>
+                      <?php 
+                        $no = 1;
+                        $unit_only_list = [];
+
+                        while ($riw = mysqli_fetch_array($get_riwayat)) {
+                          $unit = $riw['unitno'];
+                          $unit_only_list[] = $unit; // Simpan hanya unitno
+                      ?>
+                        <tr>
+                          <td><?= $no ?>.</td>
+                          <td><?= htmlspecialchars($unit) ?></td>
+                        </tr>
+                      <?php 
+                          $no++;
+                        } 
+                      ?>
                     </tbody>
                   </table>
-
-                  <!-- Elemen tersembunyi untuk menyimpan daftar unitno -->
-                  <textarea id="unitList" style="position:absolute; left:-9999px;"><?= implode(", ", $list_unit) ?></textarea>
+                  <!-- Textarea tersembunyi untuk menyalin hanya unitno -->
+                  <textarea id="unitAres31List" style="display:none;"><?php 
+                    echo implode("\n", $unit_only_list); 
+                  ?></textarea>
 
                 </div>
               </div>
@@ -177,18 +184,33 @@ if (!isset($_SESSION["admin"])) {
                   ?>
                 <div class="card card-body">
                   <h6 class="top-title">-- SPM Ares 3.0 --</h6>
+                  <!-- Tombol untuk menyalin -->
+                  <button onclick="salinUnitAres30()" class="mb-2" style="border:none;">Copy</button>
+
                   <table>
                     <tbody>
-                    <?php 
-                    while ($riw = mysqli_fetch_array($get_riwayat)) {
-                    ?>
-                    <tr>
-                      <td><?= $no++ ?>.</td>
-                      <td><?= $riw['unitno'] ?></td>
-                    </tr>
-                    <?php }?>
+                      <?php 
+                        $no = 1;
+                        $unit_only_list = [];
+
+                        while ($riw = mysqli_fetch_array($get_riwayat)) {
+                          $unit = $riw['unitno'];
+                          $unit_only_list[] = $unit; // Simpan hanya unitno
+                      ?>
+                        <tr>
+                          <td><?= $no ?>.</td>
+                          <td><?= htmlspecialchars($unit) ?></td>
+                        </tr>
+                      <?php 
+                          $no++;
+                        } 
+                      ?>
                     </tbody>
                   </table>
+                  <!-- Textarea tersembunyi untuk menyalin hanya unitno -->
+                  <textarea id="unitAres30List" style="display:none;"><?php 
+                    echo implode("\n", $unit_only_list); 
+                  ?></textarea>
                 </div>
               </div>
               <div class="col-md-2 p-2">
@@ -197,19 +219,33 @@ if (!isset($_SESSION["admin"])) {
                   $get_riwayat = mysqli_query($conn, "SELECT * FROM devices WHERE xiao = 'can' OR xiao = 'can31' ORDER BY unitno ASC");
                   ?>
                 <div class="card card-body">
-                  <h6 class="top-title">-- SPM Can --</h6>
+                  <h6 class="top-title">-- SPM Can 3.0 --</h6>
+                  <button onclick="salinUnitCan30()" class="mb-2" style="border:none;">Copy</button>
+
                   <table>
                     <tbody>
-                    <?php 
-                    while ($riw = mysqli_fetch_array($get_riwayat)) {
-                    ?>
-                    <tr>
-                      <td><?= $no++ ?>.</td>
-                      <td><?= $riw['unitno'] ?></td>
-                    </tr>
-                    <?php }?>
+                      <?php 
+                        $no = 1;
+                        $unit_only_list = [];
+
+                        while ($riw = mysqli_fetch_array($get_riwayat)) {
+                          $unit = $riw['unitno'];
+                          $unit_only_list[] = $unit; // Simpan hanya unitno
+                      ?>
+                        <tr>
+                          <td><?= $no ?>.</td>
+                          <td><?= htmlspecialchars($unit) ?></td>
+                        </tr>
+                      <?php 
+                          $no++;
+                        } 
+                      ?>
                     </tbody>
                   </table>
+                  <!-- Textarea tersembunyi untuk menyalin hanya unitno -->
+                  <textarea id="unitCan30List" style="display:none;"><?php 
+                    echo implode("\n", $unit_only_list); 
+                  ?></textarea>
                 </div>
               </div>
               <div class="col-md-2 p-2">
@@ -219,18 +255,32 @@ if (!isset($_SESSION["admin"])) {
                   ?>
                 <div class="card card-body">
                   <h6 class="top-title">-- SPM Can 3.1 --</h6>
+                  <button onclick="salinUnitCan31()" class="mb-2" style="border:none;">Copy</button>
+
                   <table>
                     <tbody>
-                    <?php 
-                    while ($riw = mysqli_fetch_array($get_riwayat)) {
-                    ?>
-                    <tr>
-                      <td><?= $no++ ?>.</td>
-                      <td><?= $riw['unitno'] ?></td>
-                    </tr>
-                    <?php }?>
+                      <?php 
+                        $no = 1;
+                        $unit_only_list = [];
+
+                        while ($riw = mysqli_fetch_array($get_riwayat)) {
+                          $unit = $riw['unitno'];
+                          $unit_only_list[] = $unit; // Simpan hanya unitno
+                      ?>
+                        <tr>
+                          <td><?= $no ?>.</td>
+                          <td><?= htmlspecialchars($unit) ?></td>
+                        </tr>
+                      <?php 
+                          $no++;
+                        } 
+                      ?>
                     </tbody>
                   </table>
+                  <!-- Textarea tersembunyi untuk menyalin hanya unitno -->
+                  <textarea id="unitCan31List" style="display:none;"><?php 
+                    echo implode("\n", $unit_only_list); 
+                  ?></textarea>
                 </div>
               </div>
             </div>
@@ -242,12 +292,36 @@ if (!isset($_SESSION["admin"])) {
   </div>
   <script>
     function salinUnitAres31() {
-      const teks = document.getElementById("unitList");
-      teks.select();
-      teks.setSelectionRange(0, 99999);
+      const textarea = document.getElementById("unitAres31List");
+      textarea.style.display = "block"; // Tampilkan sementara
+      textarea.select();
+      textarea.setSelectionRange(0, 99999); // Untuk mobile
       document.execCommand("copy");
-
-      alert("List unit disalin ke clipboard!");
+      textarea.style.display = "none"; // Sembunyikan lagi
+    }
+    function salinUnitAres30() {
+      const textarea = document.getElementById("unitAres30List");
+      textarea.style.display = "block"; // Tampilkan sementara
+      textarea.select();
+      textarea.setSelectionRange(0, 99999); // Untuk mobile
+      document.execCommand("copy");
+      textarea.style.display = "none"; // Sembunyikan lagi
+    }
+    function salinUnitCan30() {
+      const textarea = document.getElementById("unitCan30List");
+      textarea.style.display = "block"; // Tampilkan sementara
+      textarea.select();
+      textarea.setSelectionRange(0, 99999); // Untuk mobile
+      document.execCommand("copy");
+      textarea.style.display = "none"; // Sembunyikan lagi
+    }
+    function salinUnitCan31() {
+      const textarea = document.getElementById("unitCan31List");
+      textarea.style.display = "block"; // Tampilkan sementara
+      textarea.select();
+      textarea.setSelectionRange(0, 99999); // Untuk mobile
+      document.execCommand("copy");
+      textarea.style.display = "none"; // Sembunyikan lagi
     }
   </script>
   <script src="js/scripts.js"></script>
