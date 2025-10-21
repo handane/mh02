@@ -147,7 +147,7 @@ if (!isset($_SESSION["admin"])) {
                   <h6 class="top-title">-- SPM Ares 3.1 --</h6>
 
                   <!-- Tombol untuk menyalin -->
-                  <button onclick="salinUnitAres31()" class="mb-2" style="border:none;">Copy</button>
+                  <button onclick="salinUnitAres31()" class="mb-2" style="border:none;"><i class="fas fa-copy"></i></button>
 
                   <table>
                     <tbody>
@@ -185,7 +185,7 @@ if (!isset($_SESSION["admin"])) {
                 <div class="card card-body">
                   <h6 class="top-title">-- SPM Ares 3.0 --</h6>
                   <!-- Tombol untuk menyalin -->
-                  <button onclick="salinUnitAres30()" class="mb-2" style="border:none;">Copy</button>
+                  <button onclick="salinUnitAres30()" class="mb-2" style="border:none;"><i class="fas fa-copy"></i></button>
 
                   <table>
                     <tbody>
@@ -220,7 +220,7 @@ if (!isset($_SESSION["admin"])) {
                   ?>
                 <div class="card card-body">
                   <h6 class="top-title">-- SPM Can 3.0 --</h6>
-                  <button onclick="salinUnitCan30()" class="mb-2" style="border:none;">Copy</button>
+                  <button onclick="salinUnitCan30()" class="mb-2" style="border:none;"><i class="fas fa-copy"></i></button>
 
                   <table>
                     <tbody>
@@ -255,7 +255,7 @@ if (!isset($_SESSION["admin"])) {
                   ?>
                 <div class="card card-body">
                   <h6 class="top-title">-- SPM Can 3.1 --</h6>
-                  <button onclick="salinUnitCan31()" class="mb-2" style="border:none;">Copy</button>
+                  <button onclick="salinUnitCan31()" class="mb-2" style="border:none;"><i class="fas fa-copy"></i></button>
 
                   <table>
                     <tbody>
