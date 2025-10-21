@@ -213,41 +213,7 @@ if (!isset($_SESSION["admin"])) {
                   ?></textarea>
                 </div>
               </div>
-              <div class="col-md-2 p-2">
-                <?php
-                  $no = 1;
-                  $get_riwayat = mysqli_query($conn, "SELECT * FROM devices WHERE xiao = 'can' OR xiao = 'can31' ORDER BY unitno ASC");
-                  ?>
-                <div class="card card-body">
-                  <h6 class="top-title">-- SPM Can 3.0 --</h6>
-                  <button onclick="salinUnitCan30()" class="mb-2" style="border:none;"><i class="fas fa-copy"></i></button>
-
-                  <table>
-                    <tbody>
-                      <?php 
-                        $no = 1;
-                        $unit_only_list = [];
-
-                        while ($riw = mysqli_fetch_array($get_riwayat)) {
-                          $unit = $riw['unitno'];
-                          $unit_only_list[] = $unit; // Simpan hanya unitno
-                      ?>
-                        <tr>
-                          <td><?= $no ?>.</td>
-                          <td><?= htmlspecialchars($unit) ?></td>
-                        </tr>
-                      <?php 
-                          $no++;
-                        } 
-                      ?>
-                    </tbody>
-                  </table>
-                  <!-- Textarea tersembunyi untuk menyalin hanya unitno -->
-                  <textarea id="unitCan30List" style="display:none;"><?php 
-                    echo implode("\n", $unit_only_list); 
-                  ?></textarea>
-                </div>
-              </div>
+              
               <div class="col-md-2 p-2">
                 <?php
                   $no = 1;
@@ -279,6 +245,41 @@ if (!isset($_SESSION["admin"])) {
                   </table>
                   <!-- Textarea tersembunyi untuk menyalin hanya unitno -->
                   <textarea id="unitCan31List" style="display:none;"><?php 
+                    echo implode("\n", $unit_only_list); 
+                  ?></textarea>
+                </div>
+              </div>
+              <div class="col-md-2 p-2">
+                <?php
+                  $no = 1;
+                  $get_riwayat = mysqli_query($conn, "SELECT * FROM devices WHERE xiao = 'can' ORDER BY unitno ASC");
+                  ?>
+                <div class="card card-body">
+                  <h6 class="top-title">-- SPM Can 3.0 --</h6>
+                  <button onclick="salinUnitCan30()" class="mb-2" style="border:none;"><i class="fas fa-copy"></i></button>
+
+                  <table>
+                    <tbody>
+                      <?php 
+                        $no = 1;
+                        $unit_only_list = [];
+
+                        while ($riw = mysqli_fetch_array($get_riwayat)) {
+                          $unit = $riw['unitno'];
+                          $unit_only_list[] = $unit; // Simpan hanya unitno
+                      ?>
+                        <tr>
+                          <td><?= $no ?>.</td>
+                          <td><?= htmlspecialchars($unit) ?></td>
+                        </tr>
+                      <?php 
+                          $no++;
+                        } 
+                      ?>
+                    </tbody>
+                  </table>
+                  <!-- Textarea tersembunyi untuk menyalin hanya unitno -->
+                  <textarea id="unitCan30List" style="display:none;"><?php 
                     echo implode("\n", $unit_only_list); 
                   ?></textarea>
                 </div>
