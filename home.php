@@ -86,6 +86,7 @@ if (!isset($_SESSION["admin"])) {
                     <th>Status MH</th>
                     <th>Modem CPE</th>
                     <th>Power</th>
+                    <th>Canbus</th>
                     <th>SPM</th>
                     <th>Bracket</th>
                     <th>Last Update</th>
@@ -107,6 +108,7 @@ if (!isset($_SESSION["admin"])) {
                       <td><?php echo $p['mh02status']; ?></td>
                       <td><?php echo $p['modem_cpe']; ?></td>
                       <td><?php echo $p['power']; ?></td>
+                      <td><?php echo $p['canbus']; ?></td>
                       <td>
                         <?php if($p['xiao'] == '3.1') {
                           echo 'ares 3.1';

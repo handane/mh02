@@ -20,11 +20,11 @@ if (!isset($_SESSION["admin"])) {
       text-align: center;
       font-size: 14px;
     }
-    table td{
+    table td {
       font-size: 13px;
     }
     .bracket {
-      background-color:cadetblue;
+      background-color:darkorange;
     }
   </style>
 </head>
@@ -98,8 +98,5 @@ if (!isset($_SESSION["admin"])) {
   <script src="js/datatables-simple-demo.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-
-
 </body>
-
 </html>
