@@ -7,7 +7,7 @@
                      <div class="sb-nav-link-icon">
                         <i class="fas fa-laptop"></i>
                      </div>
-                     Monitor
+                     Monitor MH SPM
                   </a>
                   <a class="nav-link data" href="home.php">
                      <div class="sb-nav-link-icon">
