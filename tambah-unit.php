@@ -80,6 +80,7 @@ if (!isset($_SESSION["admin"])) {
                               '".$min."',
                               '".$min."',
                               '".$min."',
+                              '".$min."',
                               '".$date."',
                               '".$min."',
                               '".$date_created."'
