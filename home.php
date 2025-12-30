@@ -41,13 +41,13 @@ if (!isset($_SESSION["admin"])) {
             $stok_rusak = mysqli_num_rows($get_rusak);
             $get_standby = mysqli_query($conn, "SELECT * FROM devices WHERE mh02status LIKE 'standby'");
             $stok_standby = mysqli_num_rows($get_standby);
-            $get_kembalikeho = mysqli_query($conn, "SELECT * FROM devices WHERE mh02status LIKE 'kembali ke HO'");
+            $get_kembalikeho = mysqli_query($conn, "SELECT * FROM devices WHERE mh02status LIKE 'kembali ke HO' AND deviceid LIKE '%SLS%'");
             $stok_kembalikeho = mysqli_num_rows($get_kembalikeho);
             $get_modem = mysqli_query($conn, "SELECT * FROM devices WHERE modem_cpe LIKE 'terpasang'");
             $stok_modem = mysqli_num_rows($get_modem);
             $get_power = mysqli_query($conn, "SELECT * FROM devices WHERE power = 'true'");
             $stok_power = mysqli_num_rows($get_power);
-            $get_xiao = mysqli_query($conn, "SELECT * FROM devices WHERE xiao = '3.1'");
+            $get_xiao = mysqli_query($conn, "SELECT * FROM devices WHERE xiao = '3.1' OR xiao = 'can31'");
             $stok_xiao = mysqli_num_rows($get_xiao);
             ?>
             <div class="mb-2 col-md-2 bg-primary" style="color:white">
@@ -56,18 +56,19 @@ if (!isset($_SESSION["admin"])) {
             <div class="mb-2 col-md-2 bg-warning" style="color:white">
               <div class="pt-2 pb-2">Power: <b><?= $stok_power ?></b></div>
             </div>
+            <div class="mb-2 col-md-2 bg-info" style="color:white">
+              <div class="pt-2 pb-2">Modem: <b><?= $stok_modem ?></b></div>
+            </div>
             <div class="mb-2 col-md-2 bg-success" style="color:white">
               <div class="pt-2 pb-2">Standby: <b><?= $stok_standby ?></b></div>
             </div>
             <div class="mb-2 col-md-2 bg-danger" style="color:white">
-              <div class="pt-2 pb-2">Sending HO: <b><?= $stok_kembalikeho ?></b></div>
+              <div class="pt-2 pb-2">Repair HO: <b><?= $stok_kembalikeho ?></b></div>
             </div>
             <div class="mb-2 col-md-2 bg-secondary" style="color:white">
-              <div class="pt-2 pb-2">Ares 3.1: <b><?= $stok_xiao ?></b></div>
+              <div class="pt-2 pb-2">SPM 3.1: <b><?= $stok_xiao ?></b></div>
             </div>
-            <div class="mb-2 col-md-2 bg-info" style="color:white">
-              <div class="pt-2 pb-2">Modem: <b><?= $stok_modem ?></b></div>
-            </div>
+            
           </div>
           <div style="text-align: right;" class="mt-2 mb-2">
             <a href="print.php" class="btn btn-sm btn-light">
@@ -83,6 +84,7 @@ if (!isset($_SESSION["admin"])) {
                     <th>Device ID</th>
                     <th>Unit No</th>
                     <th>Device IP</th>
+                    <th>IP CPE</th>
                     <th>Status MH</th>
                     <th>Modem CPE</th>
                     <th>Power</th>
@@ -104,6 +106,7 @@ if (!isset($_SESSION["admin"])) {
                     <tr style="font-size: 14px;" id="klik-tabel">
                       <td><?php echo $p['deviceid']; ?></td>
                       <td><?php echo $p['unitno']; ?></td>
+                      <td><?php echo $p['deviceip']; ?></td>
                       <td><?php echo $p['deviceip']; ?></td>
                       <td><?php echo $p['mh02status']; ?></td>
                       <td><?php echo $p['modem_cpe']; ?></td>
@@ -142,11 +145,7 @@ if (!isset($_SESSION["admin"])) {
                           echo 'baru';
                         } if($p['bracket'] == 'lama' || $p['bracket'] == '' || $p['bracket'] == '-'){ ?>
                           <div style="display: flex; gap: 10px;">
-                              Lama |
-                              <a href="update-bracket.php?deviceid=<?= $p['deviceid'] ?>"
-                                onclick="return confirm('Apakah Anda yakin ingin mengupdate ke versi baru?')">
-                                Baru
-                              </a>
+                              Lama
                           </div>
                         <?php 
                           } ?>

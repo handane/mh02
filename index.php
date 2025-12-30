@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 include("database/db.php");
 if (!isset($_SESSION["admin"])) {
@@ -60,7 +64,7 @@ if (!isset($_SESSION["admin"])) {
                     <?php }?>
                     </tbody>
                   </table>
-                  <h6 class="top-title mt-2">--- Repair ---</h6>
+                  <h6 class="top-title mt-2">--- Repair site ---</h6>
                   <table>
                     <tbody>
                     <?php 
@@ -76,10 +80,11 @@ if (!isset($_SESSION["admin"])) {
                 </div>
                 <?php
                   $no = 1;
-                  $get_riwayat_send = mysqli_query($conn, "SELECT * FROM devices WHERE mh02status = 'kembali ke HO' ORDER BY deviceid ASC");
+                  $get_riwayat_send = mysqli_query($conn, "SELECT * FROM devices WHERE mh02status = 'kembali ke HO' AND deviceid LIKE '%SLS%' ORDER BY deviceid ASC");
+                  $get_riwayat_ho = mysqli_query($conn, "SELECT * FROM devices WHERE mh02status = 'kembali ke HO' AND deviceid LIKE '%SDLIR%' ORDER BY deviceid ASC");
                   ?>
                 <div class="card card-body mt-1">
-                  <h6 class="top-title">-- Sending --</h6>
+                  <h6 class="top-title">-- Repair HO --</h6>
                   <table>
                     <tbody>
                     <?php 
@@ -88,6 +93,19 @@ if (!isset($_SESSION["admin"])) {
                     <tr>
                       <td><?= $no++ ?>.</td>
                       <td><?= $riw['deviceid'] ?></td>
+                    </tr>
+                    <?php }?>
+                    </tbody>
+                  </table>
+                  <h6 class="top-title mt-2">-- Sending HO --</h6>
+                  <table>
+                    <tbody>
+                    <?php 
+                    while ($rew = mysqli_fetch_array($get_riwayat_ho)) {
+                    ?>
+                    <tr>
+                      <td><?= $no++ ?>.</td>
+                      <td><?= $rew['deviceid'] ?></td>
                     </tr>
                     <?php }?>
                     </tbody>
