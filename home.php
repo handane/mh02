@@ -89,7 +89,6 @@ if (!isset($_SESSION["admin"])) {
                     <th>Status MH</th>
                     <th>Modem CPE</th>
                     <th>Power</th>
-                    <th>Canbus</th>
                     <th>SPM</th>
                     <th>Bracket</th>
                     <th>Last Update</th>
@@ -111,7 +110,6 @@ if (!isset($_SESSION["admin"])) {
                       <td><?php echo $p['mh02status']; ?></td>
                       <td><?php echo $p['modem_cpe']; ?></td>
                       <td><?php echo $p['power']; ?></td>
-                      <td><?php echo $p['canbus']; ?></td>
                       <td>
                         <?php if($p['xiao'] == '3.1') {
                           echo 'ares 3.1';
@@ -119,20 +117,7 @@ if (!isset($_SESSION["admin"])) {
                           echo '-';
                         } if($p['xiao'] == '3.0'){ ?>
                           <div style="display: flex; gap: 10px;">
-                              <a href="update-xiao.php?unitno=<?= $p['unitno'] ?>"
-                                onclick="return confirm('Apakah Anda yakin ingin mengupdate ke versi 3.1?')">
-                                v3.1
-                              </a>
-                              |
-                              <a href="update-xiao.php?unitnospmcan=<?= $p['unitno'] ?>" 
-                                onclick="return confirm('Apakah Anda yakin ingin mengupdate ke versi SPM CAN?')">
-                                Can
-                              </a>
-                              |
-                              <a href="update-xiao.php?unitnospmcan31=<?= $p['unitno'] ?>" 
-                                onclick="return confirm('Apakah Anda yakin ingin mengupdate ke versi SPM CAN 3.1?')">
-                                Can3.1
-                               </a>
+                              v3.0
                           </div>
                         <?php } if($p['xiao'] == 'can') {
                           echo 'can 3.0';

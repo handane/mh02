@@ -51,12 +51,6 @@
                      </div>
                      Bracket
                   </a>
-                  <a class="nav-link canbus" href="canbus.php">
-                     <div class="sb-nav-link-icon">
-                        <i class="fas fa-dragon"></i>
-                     </div>
-                     Canbus
-                  </a>
                   <!-- <a class="nav-link" href="prev-maintenance.php">
                      <div class="sb-nav-link-icon">
                         <i class="fas fa-chart-line"></i>

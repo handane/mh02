@@ -100,13 +100,6 @@ if (!isset($_SESSION["admin"])) {
                         <option value="lama">Lama</option>
                     </select>
 
-                    <label for="" class="form-label-md mt-3"><b>Canbus</b></label>
-                    <select name="canbus" class="form-select" id="" require>
-                        <option value="<?= $row['canbus'] ?>"><?= $row['canbus'] ?></option>
-                        <option value="true">True</option>
-                        <option value="false">False</option>
-                    </select>
-
                     <label for="" class="form-label-md mt-2"><b><i>*Note</b></i></label>
                     <textarea name="note" class="form-control" id="" value="<?= $row['note'] ?>"> <?= $row['note'] ?></textarea>
                     
@@ -129,7 +122,6 @@ if (!isset($_SESSION["admin"])) {
                     $power = $_POST['power'];
                     $spm = $_POST['spm'];
                     $bracket = $_POST['bracket'];
-                    $canbus = $_POST['canbus'];
                     $date = date('d-m-Y');
                     $date_created = date('Y-m-d H:i:s');
 
@@ -141,7 +133,6 @@ if (!isset($_SESSION["admin"])) {
                         power = '$power',
                         xiao = '$spm',
                         bracket = '$bracket',
-                        canbus = '$canbus',
                         last_update = '$date',
                         note = '$note',
                         date_created = '$date_created'
